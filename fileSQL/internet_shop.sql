@@ -51,13 +51,10 @@ CREATE TABLE storage_product(
 CREATE TABLE orders(
     id SERIAL PRIMARY KEY,
     client_id INTEGER REFERENCES client(id) NOT NULL,
-    order_date DATE NOT NULL,
-    is_paid BOOLEAN NOT NULL
+
 );
 
 CREATE TABLE orders_product(
-    id SERIAL PRIMARY KEY,
     product_id INTEGER REFERENCES product(id) NOT NULL,
     order_id INTEGER REFERENCES orders(id) NOT NULL,
-    quantity INTEGER NOT NULL
-);
+)
