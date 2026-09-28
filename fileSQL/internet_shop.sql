@@ -5,11 +5,28 @@ FROM product_model
 JOIN product_brand ON product_model.brand_id = product_brand.id
 GROUP BY brand_id, product_brand.brand_name;
 ---------------------
-скрипт 2
+скрипт 2 (по кроково)
 
-SELECT SUM(quantity) AS total_all_products
-FROM storage;
----------------------ґ
+1)
+ALTER TABLE storage 
+DROP COLUMN quantity;
+
+2)
+SELECT 
+    storage.id,
+    storage.city,
+    storage.storage_name, 
+    COUNT(storage_product.product_id) AS total_products
+FROM storage
+LEFT JOIN storage_product 
+    ON storage.id = storage_product.storage_id
+GROUP BY 
+    storage.id, 
+    storage.city, 
+    storage.storage_name
+ORDER BY 
+    storage.id;
+---------------------
 скрипт 3
 
 SELECT client.client_name, COUNT(orders.id) AS order_count
